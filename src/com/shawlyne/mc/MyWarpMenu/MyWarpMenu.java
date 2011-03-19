@@ -67,12 +67,29 @@ public class MyWarpMenu extends JavaPlugin {
     				System.out.println("mywarp == null :(");
     				return false; // unable to handle
     			}
+    			int page = 1;
+    			if( args.length == 1)
+    			{
+    				page = Integer.valueOf(args[0]);
+    			}
     			// Make menu
     			ArrayList<String> options = new ArrayList<String>();
     			ArrayList<String> commands = new ArrayList<String>();
 
-    			ArrayList<Warp> sortedWarps = warpList.getSortedWarps(player, 0, 20);
+    			ArrayList<Warp> sortedWarps = warpList.getSortedWarps(player, 0, 99);
+    			int warpSkipNum = 0;
+    			if( page > 1 )
+    			{
+    				warpSkipNum = 9;
+    				warpSkipNum += ((page-1)*8);
+    			}
+    			
     			for(Warp warp: sortedWarps) {
+    				if( warpSkipNum > 0 )
+    				{
+    					warpSkipNum--;
+    					continue;
+    				}
     				String name = warp.name;
     				String creator = (warp.creator.equalsIgnoreCase(player.getName()))?"you":warp.creator;
     				String color;
@@ -90,6 +107,20 @@ public class MyWarpMenu extends JavaPlugin {
     				
     				options.add(color + name);
     				commands.add("warp "+warp.name);
+    				if( page > 1 && options.size() == 8 )
+    				{
+    					// Add a 'prev page option'
+    					options.add(color + "Next Page");
+        				commands.add("wm "+(page-1));
+        				// options == 9 will end this page
+    				}
+    				if( options.size() == 9 )
+    				{
+    					// Add a 'next page option'
+    					options.add(color + "Next Page");
+        				commands.add("wm "+(page+1));
+        				break;
+    				}
     			}
     			
     			String[] opts = new String[1];
