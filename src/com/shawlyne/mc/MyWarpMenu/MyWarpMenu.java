@@ -84,7 +84,12 @@ public class MyWarpMenu extends JavaPlugin {
     				warpSkipNum = 9;
     				warpSkipNum += ((page-1)*8);
     			}
-    			
+    			int warpCount = sortedWarps.size()-9;
+    			int totalPages = 1;
+    			if( warpCount > 0 )
+    			{
+    				totalPages += (warpCount/8);
+    			}
     			for(Warp warp: sortedWarps) {
     				if( warpSkipNum > 0 )
     				{
@@ -107,21 +112,31 @@ public class MyWarpMenu extends JavaPlugin {
     				name = "'" + name + "'" + ChatColor.WHITE + creatorString;
     				options.add(color + name);
     				commands.add("warp "+warp.name);
+    				
+    				// Prev page
+    				
     				if( page > 1 && options.size() == 8 )
     				{
-    					// Add a 'prev page option'
-    					options.add(color + "Next Page");
-        				commands.add("wm "+(page-1));
-        				// options == 9 will end this page
+    					break;
     				}
-    				if( options.size() == 9 )
+    				if( options.size() == 9 && totalPages > page )
     				{
-    					// Add a 'next page option'
-    					options.add(color + "Next Page");
-        				commands.add("wm "+(page+1));
-        				break;
+    					break;
     				}
     			}
+    			if( page > 1 )
+				{
+					// Add a 'prev page option'
+					options.add(ChatColor.BLUE + "Prev Page");
+    				commands.add("wm "+(page-1));
+    				// options == 9 will end this page
+				}
+    			if( totalPages > page )
+				{
+					// Add a 'next page option'
+					options.add(ChatColor.BLUE + "Next Page");
+    				commands.add("wm "+(page+1));
+				}
     			
     			String[] opts = new String[1];
     			opts = options.toArray(opts);
