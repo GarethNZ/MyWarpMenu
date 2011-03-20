@@ -45,7 +45,8 @@ public class MyWarpMenu extends JavaPlugin {
         	
         
         PluginDescriptionFile pdfFile = this.getDescription();
-        System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " loaded." );
+        String temp = ChatColor.AQUA.toString()+"1.";
+        System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " loaded." + "Len = " + ChatColor.AQUA.toString().length() + " pos = " + temp.indexOf("1") );
     }
     
     public void onDisable() {
@@ -104,7 +105,6 @@ public class MyWarpMenu extends JavaPlugin {
     				String creatorString = (warp.publicAll?"(+)":"(-)") + " by " + creator;
 
     				name = "'" + name + "'" + ChatColor.WHITE + creatorString;
-    				
     				options.add(color + name);
     				commands.add("warp "+warp.name);
     				if( page > 1 && options.size() == 8 )
