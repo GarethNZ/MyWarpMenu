@@ -46,7 +46,7 @@ public class MyWarpMenu extends JavaPlugin {
         
         PluginDescriptionFile pdfFile = this.getDescription();
         String temp = ChatColor.AQUA.toString()+"1.";
-        System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " loaded." + "Len = " + ChatColor.AQUA.toString().length() + " pos = " + temp.indexOf("1") );
+        System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " loaded.");
     }
     
     public void onDisable() {
@@ -78,24 +78,8 @@ public class MyWarpMenu extends JavaPlugin {
     			ArrayList<String> commands = new ArrayList<String>();
 
     			ArrayList<Warp> sortedWarps = warpList.getSortedWarps(player, 0, 99);
-    			int warpSkipNum = 0;
-    			if( page > 1 )
-    			{
-    				warpSkipNum = 9;
-    				warpSkipNum += ((page-1)*8);
-    			}
-    			int warpCount = sortedWarps.size()-9;
-    			int totalPages = 1;
-    			if( warpCount > 0 )
-    			{
-    				totalPages += (warpCount/8);
-    			}
+    			
     			for(Warp warp: sortedWarps) {
-    				if( warpSkipNum > 0 )
-    				{
-    					warpSkipNum--;
-    					continue;
-    				}
     				String name = warp.name;
     				String creator = (warp.creator.equalsIgnoreCase(player.getName()))?"you":warp.creator;
     				String color;
@@ -113,36 +97,12 @@ public class MyWarpMenu extends JavaPlugin {
     				options.add(color + name);
     				commands.add("warp "+warp.name);
     				
-    				// Prev page
-    				
-    				if( page > 1 && options.size() == 8 )
-    				{
-    					break;
-    				}
-    				if( options.size() == 9 && totalPages > page )
-    				{
-    					break;
-    				}
     			}
-    			if( page > 1 )
-				{
-					// Add a 'prev page option'
-					options.add(ChatColor.BLUE + "Prev Page");
-    				commands.add("wm "+(page-1));
-    				// options == 9 will end this page
-				}
-    			if( totalPages > page )
-				{
-					// Add a 'next page option'
-					options.add(ChatColor.BLUE + "Next Page");
-    				commands.add("wm "+(page+1));
-				}
-    			
     			String[] opts = new String[1];
     			opts = options.toArray(opts);
     			String[] comms = new String[1];
     			comms = commands.toArray(comms);
-    			MenuMetaMod.sendMenu(player, new MetaModMenu(opts, comms) );
+    			MenuMetaMod.sendMenu(player, new MetaModMenu("My Warp", opts, comms) );
     			return true;
     		}
     	}
