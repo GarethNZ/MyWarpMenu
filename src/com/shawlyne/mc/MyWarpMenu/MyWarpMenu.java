@@ -58,12 +58,11 @@ public class MyWarpMenu extends JavaPlugin {
     
     public boolean onCommand(CommandSender sender, Command command,
 			String commandLabel, String[] args) {
-    		String commandName = command.getName().toLowerCase();
     		
     	if( sender instanceof Player )
     	{
     		Player player = (Player) sender;
-    		if (commandName.equalsIgnoreCase("warpmenu") || commandName.equalsIgnoreCase("wm")) {
+    		if (command.getName().equalsIgnoreCase("warpmenu") || command.getName().equalsIgnoreCase("wm")) {
     			if( mywarp == null ){ 
     				System.out.println("mywarp == null :(");
     				return false; // unable to handle
