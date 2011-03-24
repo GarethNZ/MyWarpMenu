@@ -45,7 +45,6 @@ public class MyWarpMenu extends JavaPlugin {
         	
         
         PluginDescriptionFile pdfFile = this.getDescription();
-        String temp = ChatColor.AQUA.toString()+"1.";
         System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " loaded.");
     }
     
@@ -66,11 +65,6 @@ public class MyWarpMenu extends JavaPlugin {
     			if( mywarp == null ){ 
     				System.out.println("mywarp == null :(");
     				return false; // unable to handle
-    			}
-    			int page = 1;
-    			if( args.length == 1)
-    			{
-    				page = Integer.valueOf(args[0]);
     			}
     			// Make menu
     			ArrayList<String> options = new ArrayList<String>();
