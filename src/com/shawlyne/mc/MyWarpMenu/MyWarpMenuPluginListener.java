@@ -13,8 +13,7 @@ public class MyWarpMenuPluginListener extends ServerListener {
 		plugin = instance;
 	}
 
-    @Override
-    public void onPluginEnabled(PluginEvent event) {
+    public void onPluginEnable(PluginEvent event) {
         if(event.getPlugin().getDescription().getName().equalsIgnoreCase("MyWarp")) {
         	plugin.setMyWarp( (MyWarp)event.getPlugin() );
         	
@@ -22,8 +21,7 @@ public class MyWarpMenuPluginListener extends ServerListener {
         }
     }
     
-    @Override
-    public void onPluginDisabled(PluginEvent event) {
+    public void onPluginDisable(PluginEvent event) {
     	 if(event.getPlugin().getDescription().getName().equalsIgnoreCase("MyWarp")) {
     		plugin.setMyWarp( null );
            
