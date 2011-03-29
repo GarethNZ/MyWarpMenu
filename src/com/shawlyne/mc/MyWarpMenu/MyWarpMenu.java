@@ -63,7 +63,7 @@ public class MyWarpMenu extends JavaPlugin {
     		Player player = (Player) sender;
     		if (command.getName().equalsIgnoreCase("warpmenu") || command.getName().equalsIgnoreCase("wm")) {
     			if( mywarp == null ){ 
-    				System.out.println("mywarp == null :(");
+    				System.out.println("MyWarpMenu: unable to handle because mywarp == null :(");
     				return false; // unable to handle
     			}
     			// Make menu
